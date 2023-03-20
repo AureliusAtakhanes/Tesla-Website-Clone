@@ -9,6 +9,10 @@ body {
     font-family: 'M PLUS 1', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .desktop {
     display: none;
 }
@@ -59,7 +63,11 @@ section {
 }
 
 section .content {
+    opacity: 1;
+    z-index: 1;
     width: 100%;
+    top: 0;
+    transition: opacity .3s ease;
     height: 100vh;
     padding-top: 15vh;
     padding-bottom: 15vh;
@@ -68,8 +76,12 @@ section .content {
     grid-template-rows: min-content auto min-content;
 }
 
+section.active .content {
+    opacity: 1;
+}
+
 section h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
 }
 
 section a {
@@ -103,19 +115,24 @@ section .buttons {
     section .buttons {
         max-width: 640px;
         margin: 0 auto;
-        column-gap: 20px;
         grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
     }
 }
 
 aside {
     position: fixed;
+    transition: right .4s ease;
     right: -320px;
     width: 320px;
     background-color: #fff;
     padding: 80px 40px;
     z-index: 4;
     height: 100vh;
+}
+
+aside.active {
+    right: 0;
 }
 
 aside a {
@@ -137,12 +154,20 @@ aside button.close {
     padding: 10px;
     font-family: sans-serif;
     font-weight: 100;
+    cursor: pointer;
 }
 
 .backdrop {
     display: none;
     position: fixed;
+    z-index: 3;
     inset: 0;
-    background-color: rgba(0, 0, 0, .35);
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color .4s ease;
     backdrop-filter: blur(5px);
+}
+
+.backdrop.active {
+    display: block;
+    background-color: rgba(0, 0, 0, .35);
 }
